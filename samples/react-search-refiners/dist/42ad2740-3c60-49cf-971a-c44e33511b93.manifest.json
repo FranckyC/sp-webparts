@@ -1,0 +1,78 @@
+{
+  "id": "42ad2740-3c60-49cf-971a-c44e33511b93",
+  "alias": "SearchWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.2",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "PnP"
+      },
+      "title": {
+        "default": "Search Results with Refiners",
+        "fr-fr": "Résulats de recherche avec filtres"
+      },
+      "description": {
+        "default": "Displays search results with customizable dynamic refiners",
+        "fr-fr": "Affiche des résulats de recherche avec filtres personnalisables"
+      },
+      "officeFabricIconFontName": "SearchAndApps",
+      "properties": {
+        "queryKeywords": "",
+        "queryTemplate": "{searchTerms} Path:{Site}",
+        "refiners": "Created:\"Created Date\",Size:\"Size of the file\"",
+        "selectedProperties": "Title,Path,Created,Filename,SiteLogo,PreviewUrl,PictureThumbnailURL,ServerRedirectedPreviewURL,ServerRedirectedURL",
+        "enableQueryRules": false,
+        "maxResultsCount": 10,
+        "showFileIcon": true,
+        "showCreatedDate": true
+      }
+    }
+  ],
+  "loaderConfig": {
+    "entryModuleId": "search-web-part",
+    "internalModuleBaseUrls": [
+      "https://localhost:4321/"
+    ],
+    "scriptResources": {
+      "search-web-part": {
+        "type": "path",
+        "path": "dist/search-web-part.js"
+      },
+      "SearchWebPartStrings": {
+        "defaultPath": "lib/webparts/searchResults/loc/en-us.js",
+        "type": "localizedPath"
+      },
+      "react": {
+        "type": "component",
+        "version": "15.6.2",
+        "id": "0d910c1c-13b9-4e1c-9aa4-b008c5e42d7d",
+        "failoverPath": "node_modules/react/dist/react.js"
+      },
+      "react-dom": {
+        "type": "component",
+        "version": "15.6.2",
+        "id": "aa0a46ec-1505-43cd-a44a-93f3a5aa460a",
+        "failoverPath": "node_modules/react-dom/dist/react-dom.js"
+      },
+      "@microsoft/sp-core-library": {
+        "type": "component",
+        "version": "1.4.1",
+        "id": "7263c7d0-1d6a-45ec-8d85-d4d1d234171b"
+      },
+      "@microsoft/sp-webpart-base": {
+        "type": "component",
+        "version": "1.4.1",
+        "id": "974a7777-0990-4136-8fa6-95d80114c2e0"
+      },
+      "@microsoft/sp-lodash-subset": {
+        "type": "component",
+        "version": "1.4.1",
+        "id": "73e1dc6c-8441-42cc-ad47-4bd3659f8a3a"
+      }
+    }
+  }
+}
