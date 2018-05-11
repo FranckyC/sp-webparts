@@ -1,6 +1,6 @@
 import ISearchDataProvider from "./ISearchDataProvider";
 import { ISearchResults, ISearchResult, IRefinementResult, IRefinementValue, IRefinementFilter } from "../models/ISearchResult";
-import { sp, SearchQuery, SearchQueryBuilder, SearchResults, SPRest, Web, Sort, SortDirection } from "@pnp/sp";
+import { sp, SearchQuery, SearchQueryBuilder, SearchResults, SPRest, Web, Sort, SortDirection, SearchSuggestQuery } from "@pnp/sp";
 import { PnPClientStorage, Util } from "@pnp/common";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IWebPartContext } from "@microsoft/sp-webpart-base";
@@ -10,6 +10,7 @@ import groupBy from 'lodash-es/groupBy';
 import mapValues from 'lodash-es/mapValues';
 import mapKeys from "lodash-es/mapKeys";
 import * as moment from "moment";
+import LocalizationHelper from "../helpers/LocalizationHelper";
 
 class SearchDataProvider implements ISearchDataProvider {
 
@@ -206,6 +207,42 @@ class SearchDataProvider implements ISearchDataProvider {
 
         } catch (error) {
             Logger.write("[SharePointDataProvider.search()]: Error: " + error, LogLevel.Error);
+            throw error;
+        }
+    }
+
+    /**
+     * Retrieves search query suggestions
+     * @param query the term to suggest from
+     */
+    public async suggest(query: string): Promise<string[]> {
+
+        let suggestions: string[] = [];
+    
+        const searchSuggestQuery: SearchSuggestQuery = {
+            preQuery: true,
+            querytext: query,
+            count: 10,
+            hitHighlighting: true,
+            prefixMatch: true,
+            culture: LocalizationHelper.getLocaleId(this._context.pageContext.cultureInfo.currentUICultureName).toString()
+        };
+
+        try {
+            const response = await this._localPnPSetup.searchSuggest(searchSuggestQuery);
+            
+            if (response.Queries.length > 0) {
+
+                // Get only the suggesiton string value
+                suggestions = response.Queries.map(elt => {
+                    return elt.Query;
+                });
+            }
+
+            return suggestions;
+
+        } catch (error) {
+            Logger.write("[SharePointDataProvider.suggest()]: Error: " + error, LogLevel.Error);
             throw error;
         }
     }

@@ -18,6 +18,7 @@ export default class SearchResultsContainer extends React.Component<ISearchConta
 
     public constructor(props) {
         super(props);
+        
         // Set the initial state
         this.state = {
             results: {
@@ -49,8 +50,6 @@ export default class SearchResultsContainer extends React.Component<ISearchConta
         let renderWpContent: JSX.Element = null;
         let renderOverlay: JSX.Element = null;
         let renderCount: JSX.Element = null;
-
-        
         if (!isComponentLoading && areResultsLoading) {
             renderOverlay = <div>
                 <Overlay isDarkThemed={false} className="overlay">

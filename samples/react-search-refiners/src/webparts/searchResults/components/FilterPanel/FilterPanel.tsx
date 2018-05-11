@@ -1,24 +1,18 @@
+import { Text } from "@microsoft/sp-core-library";
+import * as strings from "SearchWebPartStrings";
+import * as update from "immutability-helper";
+import { ActionButton } from "office-ui-fabric-react";
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
+import { Label } from 'office-ui-fabric-react/lib/Label';
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
+import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
+import { GroupedList, IGroup, IGroupDividerProps } from 'office-ui-fabric-react/lib/components/GroupedList/index';
 import * as React from "react";
+import { Scrollbars } from 'react-custom-scrollbars';
+import { IRefinementFilter, IRefinementValue } from "../../../models/ISearchResult";
+import "../SearchResultsWebPart.scss";
 import IFilterPanelProps from "./IFilterPanelProps";
 import IFilterPanelState from "./IFilterPanelState";
-import { PrimaryButton, DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
-import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
-import * as strings from "SearchWebPartStrings";
-import { IRefinementResult, IRefinementValue, IRefinementFilter } from "../../../models/ISearchResult";
-import { Link } from 'office-ui-fabric-react/lib/Link';
-import { Label } from 'office-ui-fabric-react/lib/Label';
-import { Text } from "@microsoft/sp-core-library";
-import "../SearchResultsWebPart.scss";
-import * as update from "immutability-helper";
-import {
-    GroupedList,
-    IGroup,
-    IGroupDividerProps
-} from 'office-ui-fabric-react/lib/components/GroupedList/index';
-import { Scrollbars } from 'react-custom-scrollbars';
-import { ActionButton } from "office-ui-fabric-react";
 
 export default class FilterPanel extends React.Component<IFilterPanelProps, IFilterPanelState> {
 

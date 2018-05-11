@@ -5,6 +5,10 @@ import clone from "lodash-es/clone";
 
 class MockSearchDataProvider implements ISearchDataProvider {
 
+    public queryTemplate?: string;
+    public resultSourceId?: string;
+    public enableQueryRules?: boolean;
+
     public selectedProperties: string[];
 
     private _itemsCount: number;
@@ -13,6 +17,7 @@ class MockSearchDataProvider implements ISearchDataProvider {
     public set resultsCount(value: number) { this._itemsCount = value; }
 
     private _searchResults: ISearchResults;
+    private _suggestions: string[];
 
     public constructor() {
      
@@ -98,6 +103,18 @@ class MockSearchDataProvider implements ISearchDataProvider {
             ],      
             TotalRows: 5,      
         };
+
+        this._suggestions = [
+            "sharepoint",
+            "analysis document",
+            "project document",
+            "office 365",
+            "azure cloud architecture",
+            "architecture document",
+            "sharepoint governance guide",
+            "hr policies",
+            "human resources procedures"
+        ];
     }
 
     public search(query: string, refiners?: string, refinementFilters?: IRefinementFilter[], pageNumber?: number): Promise<ISearchResults> {
@@ -136,6 +153,34 @@ class MockSearchDataProvider implements ISearchDataProvider {
             }, 1000);
         });
 
+        return p1;
+    }
+
+    public async suggest(keywords: string): Promise<string[]> {
+       
+        let proposedSuggestions: string[] = [];
+
+        const p1 = new Promise<string[]>((resolve, reject) => {
+            this._suggestions.map(suggestion => {
+
+                const idx = suggestion.toLowerCase().indexOf(keywords.toLowerCase());
+                if (idx !== -1) {
+
+                    const preMatchedText = suggestion.substring(0, idx);
+                    const postMatchedText = suggestion.substring(idx + keywords.length, suggestion.length);
+                    const matchedText = suggestion.substr(idx, keywords.length);
+
+                    proposedSuggestions.push(`${preMatchedText}<B>${matchedText}</B>${postMatchedText}`);
+                }
+            });
+            
+            // Simulate an async call
+            setTimeout(() => {
+                resolve(proposedSuggestions);
+            }, 100);
+
+        });
+        
         return p1;
     }
 

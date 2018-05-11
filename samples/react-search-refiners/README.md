@@ -30,6 +30,7 @@ Version|Date|Comments
 1.0 | October 17, 2017 | Initial release
 1.1 | January 03, 2018 | Improvements and updating to SPFx drop 1.4
 1.2 | February 12, 2018 | Added a search box Web Part + Added a "Result Source Id" and "Enable Query Rules" parameters.
+1.3 | May 10, 2018 | Added the query suggestions feature to the search box Web Part.
 
 ## Disclaimer
 **THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
@@ -60,16 +61,10 @@ Refiners | The search managed properties to use as refiners. Make sure these are
 Number of items to retrieve per page | Quite explicit. The paging behavior is done directly by the search API (See the *SearchDataProvider.ts* file), not by the code on post-render.
 Show paging | Indicates whether or not the component should show the paging control at the bottom.
 
-## Search Box/Search Results communication
-
-The communication between the two web parts is done using the default SPFx `eventAggregator` property (still in alpha as of march 2018). However, this link can be updated to use the concept shown in the [react-rxjs-event-emitter](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-rxjs-event-emitter) example().
-
-Checkout this [article](https://blog.velingeorgiev.com/sharepoint-framework-publish-subscribe-event-messaging) by Velin Georgiev to get more information.
-
 ## Features
 This Web Part illustrates the following concepts on top of the SharePoint Framework:
 
-- Build an user friendly search experience on the top of the SharePoint search REST API with paging and refiners using the *sp-pnp-js* library.
+- Build an user friendly search experience on the top of the SharePoint search REST API with paging, refiners and query suggestions using the *@pnp* JavaScript library.
 - Integrate the [@pnp/spfx-property-controls](https://github.com/SharePoint/sp-dev-fx-property-controls) in your solution (*PlaceHolder* control).
 - Integrate multiple Office UI Fabric components (DocumentCard, Panel, GroupedList, ...) to fit with the native Office 365 theme.
 - Use the React container component approach inspiring by the [react-todo-basic sample](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-todo-basic).

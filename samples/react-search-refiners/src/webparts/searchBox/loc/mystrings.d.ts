@@ -1,5 +1,8 @@
+
 declare interface ISearchBoxWebPartStrings {
   SearchInputPlaceholder: string;
+  SearchBoxQuerySuggestionsSettings: string;
+  SearchBoxEnableQuerySuggestions: string;
 }
 
 declare module 'SearchBoxWebPartStrings' {

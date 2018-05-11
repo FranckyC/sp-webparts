@@ -28,10 +28,17 @@ interface ISearchDataProvider {
     enableQueryRules?: boolean;
 
     /**
-     * Perfoms a search query.
-     * @returns ISearchResults object. Use the "RelevantResults" property to access results properties (returned as key/value pair object => item.[<Managed property name>])
+     * Performs a search query.
+     * @returns ISearchResults object. Use the "RelevantResults" property to acces results proeprties (returned as key/value pair object => item.[<Managed property name>])
      */
     search(kqlQuery: string, refiners?: string, refinementFilters?: IRefinementFilter[], pageNumber?: number): Promise<ISearchResults>;
+
+    /**
+     * Retrieves search query suggestions
+     * @param query the term to suggest from
+     */
+    suggest(query: string): Promise<string[]>;
+    
 }
 
  export default ISearchDataProvider;
