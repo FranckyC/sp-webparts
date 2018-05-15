@@ -6,6 +6,7 @@ import "../SearchBoxWebPart.scss";
 import { ISearchBoxProps } from './ISearchBoxContainerProps';
 import { ISearchBoxContainerState } from './ISearchBoxContainerState';
 import * as update from "immutability-helper";
+import { UrlHelper, PageOpenBehavior } from '../../common/UrlHelper';
 
 export default class SearchBoxContainer extends React.Component<ISearchBoxProps, ISearchBoxContainerState> {
 
@@ -188,14 +189,23 @@ export default class SearchBoxContainer extends React.Component<ISearchBoxProps,
    */
   private async _onSearch(queryText: string) {
     
-    let query: string = queryText;
     
-    // Sends the query to the search box if present on the page
-    this.props.eventAggregator.raiseEvent("search:newQueryKeywords", {
-        data: query,
+    if (this.props.searchInNewPage) {
+      
+      // Send the query to the a new via the query string
+      const url = UrlHelper.addOrReplaceQueryStringParam(this.props.pageUrl, "q", encodeURIComponent(queryText));
+
+      const behavior = this.props.openBehavior === PageOpenBehavior.NewTab ? "_blank" : "_self";
+      window.open(url, behavior);
+      
+    } else {
+      // Send the query to components on the page
+      this.props.eventAggregator.raiseEvent("search:newQueryKeywords", {
+        data: queryText,
         sourceId: "SearchBoxQuery",
         targetId: "SearchResults"
-    });
+      });
+    }
   }
 
   /**

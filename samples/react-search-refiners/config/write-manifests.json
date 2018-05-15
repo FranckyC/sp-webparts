@@ -1,4 +1,4 @@
 {
   "$schema": "https://dev.office.com/json-schemas/spfx-build/write-manifests.schema.json",
-  "cdnBasePath": "https://UPDATED-ON-DEPLOYEMENT"
+  "cdnBasePath": "<!-- PATH TO CDN -->"
 }

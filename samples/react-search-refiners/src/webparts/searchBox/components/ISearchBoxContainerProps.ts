@@ -1,8 +1,12 @@
 import { IEventAggregator } from "@microsoft/sp-webpart-base";
-import ISearchDataProvider from "../../dataProviders/ISearchDataProvider";
+import { PageOpenBehavior } from "../../common/UrlHelper";
+import ISearchDataProvider from "../../dataProviders/SearchDataProvider/ISearchDataProvider";
 
 export interface ISearchBoxProps {
     eventAggregator: IEventAggregator;
     enableQuerySuggestions: boolean;
     searchDataProvider: ISearchDataProvider;
+    searchInNewPage: boolean;
+    pageUrl: string;
+    openBehavior: PageOpenBehavior;
 }
