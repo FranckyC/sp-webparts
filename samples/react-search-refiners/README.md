@@ -68,7 +68,6 @@ Show paging | Indicates whether or not the component should show the paging cont
 Show file icons | Shows the file icon for individual result 
 Show created date | Shows the created date for individual result 
 
-
 ### Taxonomy values dynamic translation
 
 This Web Part supports the translation for taxonomy based filters according to current site language. To get it work, you must map a new refinable managed property associated with *ows_taxId_<your_column_name>* crawled property.
@@ -77,6 +76,9 @@ This Web Part supports the translation for taxonomy based filters according to c
   <img src="./images/managed-property.png"/>
 </p>
 
+### Query suggestions
+
+Refer to the following [article](https://docs.microsoft.com/en-us/sharepoint/search/manage-query-suggestions) to know how to add query suggestions in SharePoint (caution: it can take up to 24h for changes to take effect).
 
 ## Features
 This Web Part illustrates the following concepts on top of the SharePoint Framework:
