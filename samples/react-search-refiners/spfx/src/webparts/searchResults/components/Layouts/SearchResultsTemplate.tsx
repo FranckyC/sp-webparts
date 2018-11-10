@@ -28,13 +28,6 @@ export default class SearchResultsTemplate extends React.Component<ISearchResult
                 </div>;
     }
      
-    public componentWillUnmount() {
-
-        if (document.querySelector('iframe')) {
-            this.resize.removeResizeListener(this.parentRef, this.onComponentResize);
-        }        
-    }
-
     public componentDidMount() {
         this._updateTemplate(this.props);      
         this.resize.addResizeListener(this.parentRef, this.onComponentResize);
