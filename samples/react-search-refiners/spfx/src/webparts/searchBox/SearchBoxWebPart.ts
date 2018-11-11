@@ -337,9 +337,14 @@ export default class SearchBoxWebPart extends BaseClientSideWebPart<ISearchBoxWe
               }),
               PropertyPaneToggle("enableDebugMode", {
                   checked: false,
-                  label: strings.SearchBoxUserDebugModeLabel,
+                  label: strings.SearchBoxUseDebugModeLabel,
                   disabled: !this.properties.enableNlpService,
-              })
+              }),
+              PropertyPaneToggle("isStaging", {
+                checked: true,
+                label: strings.SearchBoxUseStagingEndpoint,
+                disabled: !this.properties.enableNlpService,
+            }),
           );
       } else {
           this.properties.enableDebugMode = false;

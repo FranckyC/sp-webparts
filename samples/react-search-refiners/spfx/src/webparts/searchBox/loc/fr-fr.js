@@ -15,7 +15,8 @@ define([], function() {
       "SearchBoxServiceUrlLabel": "URL du service",
       "SearchBoxServiceUrlDescription": "Attention: assurez-vous que les paramètres CORS de votre serveur autorisent les appels provenant de ce domaine origine ('{0}')",
       "SearchBoxServiceUrlErrorMessage": "Veuillez spécifier une URL valide",
-      "SearchBoxUserDebugModeLabel": "Activer le mode déboggage",
+      "SearchBoxUseDebugModeLabel": "Activer le mode déboggage",
+      "SearchBoxUseStagingEndpoint": "Utiliser le point de terminaison d'évaluation LUIS",
       "UrlNotResolvedErrorMessage": "L'URL '{0}' n'a pas pu être resolue. Erreur: '{1}'.",
       "DynamicData": {
         "UseDynamicDataSourceLabel": "Utiliser une source de données dynamique",

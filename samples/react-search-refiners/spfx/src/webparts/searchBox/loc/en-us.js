@@ -17,7 +17,8 @@ define([], function() {
     "SearchBoxServiceUrlLabel": "Service URL",
     "SearchBoxServiceUrlDescription": "Notice: make sure the server allows cross-origin calls from this domain ('{0}') in CORS settings.",
     "SearchBoxServiceUrlErrorMessage": "Please specifiy a valid URL",
-    "SearchBoxUserDebugModeLabel": "Enable debug mode",
+    "SearchBoxUseDebugModeLabel": "Enable debug mode",
+    "SearchBoxUseStagingEndpoint": "Use LUIS staging endpoint",
     "UrlNotResolvedErrorMessage": "URL '{0}' can't be resolved. Error: '{1}'.",
     "DynamicData": {
       "UseDynamicDataSourceLabel": "Use a dynamic data  source",
@@ -30,7 +31,7 @@ define([], function() {
       "DetectedLanguageLabel": "Language detected",
       "RecognizedEntitiesLabel": "Recognized entities",
       "TopScoringIntentNameLabel": "Top scoring entity",
-      "TopScoringIntentScoreLabel": "Top scoring entity confience",
+      "TopScoringIntentScoreLabel": "Top scoring entity confidence",
       "EnhancedQueryLabel": "Enhanced search query",
       "AlteredQueryLabel": "Corrected query"
     }
