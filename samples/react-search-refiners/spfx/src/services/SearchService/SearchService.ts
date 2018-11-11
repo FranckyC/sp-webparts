@@ -275,7 +275,7 @@ class SearchService implements ISearchService {
 
         const searchSuggestQuery: SearchSuggestQuery = {
             preQuery: true,
-            querytext: query,
+            querytext: encodeURIComponent(query.replace(/'/g, '\'\'')),
             count: 10,
             hitHighlighting: true,
             prefixMatch: true,

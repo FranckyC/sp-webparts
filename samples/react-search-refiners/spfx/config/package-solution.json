@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "react-search-refiners-client-side-solution",
+    "name": "pnp-react-search-refiners",
     "id": "ec742d56-6535-4ef1-85e0-27e2c79a9fb5",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -9,6 +9,6 @@
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/react-search-refiners.sppkg"
+    "zippedPackage": "solution/pnp-react-search-refiners.sppkg"
   }
 }

@@ -93,12 +93,7 @@ export default class SearchResultsContainer extends React.Component<ISearchConta
                                 sortDirection={this.state.sortDirection}
                                 sortField={this.state.sortField} />; 
         if (hasError) {
-            if(this.state.errorMessage === strings.Sort.SortErrorMessage)
-            {
-                renderWpContent = <div><div className={styles.searchWp__buttonBar}>{sortPanel}</div><MessageBar messageBarType={MessageBarType.error}>{errorMessage}</MessageBar></div>;
-            }else {
-                renderWpContent = <MessageBar messageBarType={MessageBarType.error}>{errorMessage}</MessageBar>;
-            }
+            renderWpContent = <MessageBar messageBarType={MessageBarType.error}>{errorMessage}</MessageBar>;
         } else {
 
             const currentQuery = this.props.queryKeywords + this.props.searchService.queryTemplate + this.props.selectedProperties.join(',');
