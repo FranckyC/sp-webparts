@@ -56,7 +56,7 @@ This solution uses an Azure function proxy to get an only single endpoint URL fo
 
 We recommend to use Visual Studio Code to work with this solution.
 
-- In VSCode, download the ["Azure Function" extension](ms-azuretools.vscode-azurefunctions)
+- In VSCode, download the [Azure Function](https://code.visualstudio.com/tutorials/functions-extension/getting-started) extension
 - Sign-in to to Azure account into the extension
 - In a Node.js console, build the application using the command `npm run build` (minified version)
 - Use the **"Deploy to Function App"** feature (in the extension top bar) using the *'dist'* folder. Make sure you've run the `npm run build` cmd before.
@@ -72,7 +72,7 @@ A `deploy.ps1` script is available to also deploy this function into your Azure 
 
 ***In both scenarios, you can test your function using Postman. If you test it using a SPFx component, don't forget to add the SharePoint domain to the CORS settings to allow this origin:***
 
-<p align="center"><img src="../images/cors_settings.png"/><p>
+<p align="center"><img width="500px" src="../images/cors_settings.png"/><p>
 
 
 

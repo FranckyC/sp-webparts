@@ -71,7 +71,7 @@ Version|Date|Comments
 
 ### Search Box Web Part
 
-<p align="center"><img src="./images/sb_property_pane.png"/><p>
+<p align="center"><img width="500px" src="./images/sb_property_pane.png"/><p>
 
 #### Default Search Query Settings 
 
@@ -114,7 +114,7 @@ Setting | Description
 -------|----
 Search query keywords | Here you choose to use a static search query or a query coming from a data source. It is recommended to use the associated Web Part coming with this sample. The search query is in KQL format so you can use search query variables (See this [post](http://www.techmikael.com/2015/07/sharepoint-rest-do-support-query.html) to know which ones are allowed). You can only plug one source to this Web Part.
 
-<p align="center"><img src="./images/wp_connection.png"/><p>
+<p align="center"><img width="500px" src="./images/wp_connection.png"/><p>
 
 #### Search Settings
 
@@ -153,7 +153,7 @@ Handlebars Helpers | Load [handlebar helpers](https://github.com/helpers/handleb
 This Web Part allows you change customize the way you display your search results. The templating feature comes directly from the original [react-content-query-webpart](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-content-query-webpart) so thanks to @spplante!
 
 <p align="center">
-  <img src="./images/edit_template.png"/>
+  <img width="500px" src="./images/edit_template.png"/>
 </p>
 
 ##### Query variables
@@ -183,11 +183,11 @@ The following custom query variables are supported:
 This WP supports SharePoint best bets via SharePoint query rules:
 
 <p align="center">
-  <img src="./images/query_rules.png"/>
+  <img width="500px" src="./images/query_rules.png"/>
 </p>
 
 <p align="center">
-  <img src="./images/best_bets.png"/>
+  <img width="500px" src="./images/best_bets.png"/>
 </p>
 
 ##### Elements previews
@@ -195,7 +195,7 @@ This WP supports SharePoint best bets via SharePoint query rules:
 Previews are available, **only for the list view**, for Office documents and Office 365 videos (not Microsoft Stream). The embed URL is directly taken from the `ServerRedirectedEmbedURL` managed property retrieved from the search results. 
 
 <p align="center">
-  <img src="./images/result_preview.png"/>
+  <img width="500px" src="./images/result_preview.png"/>
 </p>
 
 The WebPart must have the following selected properties in the configuration to get the preview feature work (they are set by default): 
