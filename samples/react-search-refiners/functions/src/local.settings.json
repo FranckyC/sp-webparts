@@ -2,7 +2,6 @@
   "IsEncrypted": false,
   "Values": {
     "LUIS_SubscriptionKey": "0065cf294a8244409cf40f1400ed74ab",
-    "LUIS_AuthoringKey": "e26d277b6c8b4d02b549d5088045e3c3",
     "LUIS_AzureRegion": "eastus",
     "LUIS_AppConfigFolderPath": ".\\config",
     "LUIS_MappingsFile": ".\\config\\luismappings.dev.json",
