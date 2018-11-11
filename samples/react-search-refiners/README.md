@@ -40,7 +40,7 @@ Version|Date|Comments
 1.3 | Apr1, 2018 | Added the result count + entered keywords option
 1.4 | May 10, 2018 | <ul><li>Added the query suggestions feature to the search box Web Part</li><li>Added the automatic translation for taxonomy filter values according to the current site locale.</li> <li>Added the option in the search box Web Part to send the query to an other page</ul>
 1.5 | Jul 2, 2018 | <ul><li>Added a templating feature for search results with Handlebars inspired by the [react-content-query-webpart](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-content-query-webpart) sample.</li><li>Upgraded to 1.5.1-plusbeta to use the new SPFx dynamic data feature instead of event aggregator for Web Parts communication.</li> <li>Code refactoring and reorganization.</ul>
-2.0.0.5 | Sept 18, 2018 | <ul><li>Upgraded to 1.6.0-plusbeta.</li><li>Added dynamic loading of parts needed in edit mode to reduce web part footprint.</li><li>Added configuration to sort.</li><li>Added option to set web part title.</li><li>Added result count tokens.</li><li>Added toggel to load/use handlebars helpers/moment.</li></ul>
+2.0.0.5 | Sept 18, 2018 | <ul><li>Upgraded to 1.6.0-plusbeta.</li><li>Added dynamic loading of parts needed in edit mode to reduce web part footprint.</li><li>Added configuration to sort.</li><li>Added option to set web part title.</li><li>Added result count tokens.</li><li>Added toggle to load/use handlebars helpers/moment.</li></ul>
 2.1.0.0 | Oct 14, 2018 | <ul><li>Bug fixes ([#641](https://github.com/SharePoint/sp-dev-fx-webparts/issues/641),[#642](https://github.com/SharePoint/sp-dev-fx-webparts/issues/642))</li><li>Added document and Office 365 videos previews for the list template.</li><li>Added SharePoint best bets support.</li></ul>
 2.1.1.0 | Oct 30, 2018 | <ul><li>Bug fix for editing custom template.</li><li>Bug fix for dynamic loading of video helper library.</li><li>Added support for Page context query variables.</li><li>Added `getUniqueCount` helper function.</li></ul>
 2.1.2.0 | Nov 9, 2018 | <ul><li>Bug fix for IE11.</li><li>Added date query variables.</li><li>Added support for both result source id and query template.</li><li>Added `getUniqueCount` helper function.</li></ul>
@@ -71,7 +71,7 @@ Version|Date|Comments
 
 ### Search Box Web Part
 
-<p align="center"><img width="500px" src="./images/sb_property_pane.png"/><p>
+<p align="center"><img width="300px" src="./images/sb_property_pane.png"/><p>
 
 #### Default Search Query Settings 
 
@@ -91,6 +91,8 @@ Send the query to a new page | Sends the search query text to a new page. On tha
 Setting | Description 
 -------|----
 Use Natural Language Processing service | Turn this option 'on' if you want to enhance the query text with NLP services like LUIS. In the _'Service Url'_ field, enter the URL of the Azure Function endpoint. Refer the instructions in the `'/functions/README.md'` file to set up the service. In this sample, only relevant detected keywords are returned as q new query using LUIS. Enabling debug mode will show you relevant information about the entered query.
+
+---
 
 ### Search Results Web Part
 
@@ -114,7 +116,7 @@ Setting | Description
 -------|----
 Search query keywords | Here you choose to use a static search query or a query coming from a data source. It is recommended to use the associated Web Part coming with this sample. The search query is in KQL format so you can use search query variables (See this [post](http://www.techmikael.com/2015/07/sharepoint-rest-do-support-query.html) to know which ones are allowed). You can only plug one source to this Web Part.
 
-<p align="center"><img width="500px" src="./images/wp_connection.png"/><p>
+<p align="center"><img width="300px" src="./images/wp_connection.png"/><p>
 
 #### Search Settings
 
@@ -148,6 +150,8 @@ Show paging | Indicates whether or not the component should show the paging cont
 Result Layouts options | Choose the template to use to display search results. Some layouts are defined by default (List oand Tiles) but you can create your own either by clinkg on the **"Custom"** tile, or **"Edit template"** from an existing chosen template. In custom mode, you can set an external template. It has to be in the same SharePoint tenant. Behind the scenes, the Office UI Fabric core CSS components are used in a isolated way.
 Handlebars Helpers | Load [handlebar helpers](https://github.com/helpers/handlebars-helpers) to use in your template. Disable this option will make Web Part loading faster if you don't need them.
 
+---
+
 #### Templates with Handlebars
 
 This Web Part allows you change customize the way you display your search results. The templating feature comes directly from the original [react-content-query-webpart](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-content-query-webpart) so thanks to @spplante!
@@ -156,58 +160,7 @@ This Web Part allows you change customize the way you display your search result
   <img width="500px" src="./images/edit_template.png"/>
 </p>
 
-##### Query variables
-The following out of the box query variables are supported/tested:
-
-* {searchTerms}
-* {Site}
-* {SiteCollection}
-* {URLToken}
-* {User}
-* {Today}
-* {SearchBoxQuery}
-* {CurrentDisplayLanguage}
-* {CurrentDisplayLCID}
-
-The following custom query variables are supported:
-
-* {Page.&lt;column&gt;} - where column is the internal name of the column.
-   * When used with taxonomy columns, use `{Page.Column.Label}` or `{Page.Column.TermID}`
-* {CurrentYear} - Todays's date four digits, 2018
-* {CurrentMonth} - Today's month, 1-12
-* {CurrentDate} - Today's date, 1-31
-   * Sample query template: {searchTerms} Write>2010-{CurrentMonth}-{CurrentDate}
-
-##### Best bets
-
-This WP supports SharePoint best bets via SharePoint query rules:
-
-<p align="center">
-  <img width="500px" src="./images/query_rules.png"/>
-</p>
-
-<p align="center">
-  <img width="500px" src="./images/best_bets.png"/>
-</p>
-
-##### Elements previews
-
-Previews are available, **only for the list view**, for Office documents and Office 365 videos (not Microsoft Stream). The embed URL is directly taken from the `ServerRedirectedEmbedURL` managed property retrieved from the search results. 
-
-<p align="center">
-  <img width="500px" src="./images/result_preview.png"/>
-</p>
-
-The WebPart must have the following selected properties in the configuration to get the preview feature work (they are set by default): 
-- ServerRedirectedPreviewURL
-- ServerRedirectedURL
-- contentclass
-- ServerRedirectedEmbedURL
-- DefaultEncodingURL
-
-This preview is displayed as an _iframe_ when the user clicks on the corresponding preview image. DOM manipulations occur to add the _iframe_ container dynamically aside with the _<img/>_ container.
-
-#### Available tokens ####
+##### Available tokens
 
 Setting | Description 
 -------|----
@@ -229,6 +182,58 @@ Setting | Description
 `{{getUniqueCount array}}` | Get the unique count of objects in an array. Example: [1,1,1,2,2,4] would return `3`.
 
 Also the [Handlebars helpers](https://github.com/helpers/handlebars-helpers) (188 helpers) are also available. You can also define your own in the *BaseTemplateService.ts* file. See [helper-moment](https://github.com/helpers/helper-moment) for date samples using moment.
+
+#### Query variables
+
+The following out of the box query variables are supported/tested:
+
+* {searchTerms}
+* {Site}
+* {SiteCollection}
+* {URLToken}
+* {User}
+* {Today}
+* {SearchBoxQuery}
+* {CurrentDisplayLanguage}
+* {CurrentDisplayLCID}
+
+The following custom query variables are supported:
+
+* {Page.&lt;column&gt;} - where column is the internal name of the column.
+   * When used with taxonomy columns, use `{Page.Column.Label}` or `{Page.Column.TermID}`
+* {CurrentYear} - Todays's date four digits, 2018
+* {CurrentMonth} - Today's month, 1-12
+* {CurrentDate} - Today's date, 1-31
+   * Sample query template: {searchTerms} Write>2010-{CurrentMonth}-{CurrentDate}
+
+#### Best bets
+
+This WP supports SharePoint best bets via SharePoint query rules:
+
+<p align="center">
+  <img width="500px" src="./images/query_rules.png"/>
+</p>
+
+<p align="center">
+  <img width="500px" src="./images/best_bets.png"/>
+</p>
+
+#### Elements previews
+
+Previews are available, **only for the list view**, for Office documents and Office 365 videos (not Microsoft Stream). The embed URL is directly taken from the `ServerRedirectedEmbedURL` managed property retrieved from the search results. 
+
+<p align="center">
+  <img width="500px" src="./images/result_preview.png"/>
+</p>
+
+The WebPart must have the following selected properties in the configuration to get the preview feature work (they are set by default): 
+- ServerRedirectedPreviewURL
+- ServerRedirectedURL
+- contentclass
+- ServerRedirectedEmbedURL
+- DefaultEncodingURL
+
+This preview is displayed as an _iframe_ when the user clicks on the corresponding preview image. DOM manipulations occur to add the _iframe_ container dynamically aside with the _<img/>_ container.
 
 ## Features
 This Web Part illustrates the following concepts on top of the SharePoint Framework:
