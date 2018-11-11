@@ -10,7 +10,7 @@ This sample shows you how to build user friendly SharePoint search experiences u
 An associated [blog post](http://thecollaborationcorner.com/2017/10/16/build-dynamic-sharepoint-search-experiences-with-refiners-and-paging-with-spfx-office-ui-fabric-and-pnp-js-library/) is available to give you more details about this sample implementation.
 
 ## Used SharePoint Framework Version 
-![drop](https://img.shields.io/badge/drop-1.6.0--plusbeta-blue.svg)
+![drop](https://img.shields.io/badge/drop-1.7.0-green.svg)
 
 ## Applies to
 
@@ -35,8 +35,8 @@ Version|Date|Comments
 1.5 | Jul 2, 2018 | <ul><li>Added a templating feature for search results with Handlebars inspired by the [react-content-query-webpart](https://github.com/SharePoint/sp-dev-fx-webparts/tree/master/samples/react-content-query-webpart) sample.</li><li>Upgraded to 1.5.1-plusbeta to use the new SPFx dynamic data feature instead of event aggregator for Web Parts communication.</li> <li>Code refactoring and reorganization.</ul>
 2.0.0.5 | Sept 18, 2018 | <ul><li>Upgraded to 1.6.0-plusbeta.</li><li>Added dynamic loading of parts needed in edit mode to reduce web part footprint.</li><li>Added configuration to sort.</li><li>Added option to set web part title.</li><li>Added result count tokens.</li><li>Added toggel to load/use handlebars helpers/moment.</li></ul>
 2.1.0.0 | Oct 14, 2018 | <ul><li>Bug fixes ([#641](https://github.com/SharePoint/sp-dev-fx-webparts/issues/641),[#642](https://github.com/SharePoint/sp-dev-fx-webparts/issues/642))</li><li>Added document and Office 365 videos previews for the list template.</li><li>Added SharePoint best bets support.</li></ul>
-2.1.1.0 | Oct 30, 2018 | <ul><li>Bug fix for editing custom template.</li><li>bug fix for dynamic loading of video helper library.</li><li>Added support for Page context query variables.</li><li>Added `getUniqueCount` helper function.</li></ul>
-2.2.0.0 | Nov 11th, 2018 | <ul><li>Upgraded to SPFx 1.7.0</li><li>Added a TypeScript Azure Function to demonstrate NLP processing on search query</li><li>Removed extension data source. Now we use the default SPFx 'Page Environment' data source.</li></ul>
+2.1.1.0 | Oct 30, 2018 | <ul><li>Bug fix for editing custom template.</li><li>Bug fix for dynamic loading of video helper library.</li><li>Added support for Page context query variables.</li><li>Added `getUniqueCount` helper function.</li></ul>
+2.1.2.0 | Nov 9, 2018 | <ul><li>Bug fix for IE11.</li><li>Added date query variables.</li><li>Added support for both result id and query template.</li><li>Added `getUniqueCount` helper function.</li></ul>
 
 ## Disclaimer
 **THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
@@ -85,6 +85,7 @@ Result Source Identifier | The GUID of a SharePoint result source. If you specif
 Enable Query Rules | Enable the query rules if applies
 Selected properties | The search managed properties to retrieve. You can use these properties then in the code like this (`item.property_name`).
 Refiners | The search managed properties to use as refiners. Make sure these are refinable. With SharePoint Online, you have to reuse the default ones to do so (RefinableStringXX etc.). The order is the same as they will appear in the refnement panel. You can also provide your own custom labels using the following format RefinableString01:"You custom filter label",RefinableString02:"You custom filter label",...
+Sortable fields | The search managed properties to use for sorting. Make sure these are sortable. With SharePoint Online, you have to reuse the default ones to do so (RefinableStringXX etc.). The order is the same as they will appear in the sort panel. You can also provide your own custom labels using the following format RefinableString01:"You custom filter label",RefinableString02:"You custom filter label",... If no sortable fields are provided, the 'Sort' button will not be visible.
 Number of items to retrieve per page | Quite explicit. The paging behavior is done directly by the search API (See the *SearchDataProvider.ts* file), not by the code on post-render.
 
 #### Styling Options ####
@@ -133,6 +134,10 @@ The following custom query variables are supported:
 
 * {Page.&lt;column&gt;} - where column is the internal name of the column.
    * When used with taxonomy columns, use `{Page.Column.Label}` or `{Page.Column.TermID}`
+* {CurrentYear} - Todays's date four digits, 2018
+* {CurrentMonth} - Today's month, 1-12
+* {CurrentDate} - Today's date, 1-31
+   * Sample query template: {searchTerms} Write>2010-{CurrentMonth}-{CurrentDate}
 
 #### Best bets
 

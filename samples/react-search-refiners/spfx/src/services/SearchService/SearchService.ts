@@ -9,6 +9,7 @@ import {sortBy, groupBy} from                                                   
 const mapKeys: any = require('lodash/mapKeys');
 const mapValues: any = require('lodash/mapValues');
 import LocalizationHelper from                                                                        '../../helpers/LocalizationHelper';
+import "@pnp/polyfill-ie11";
 
 declare var System: any;
 
@@ -81,11 +82,11 @@ class SearchService implements ISearchService {
 
         if (this._resultSourceId) {
             searchQuery.SourceId = this._resultSourceId;
-        } else {
-            // To be able to use search query variable according to the current context
-            // http://www.techmikael.com/2015/07/sharepoint-rest-do-support-query.html
-            searchQuery.QueryTemplate = this._queryTemplate;
         }
+        
+        // To be able to use search query variable according to the current context
+        // http://www.techmikael.com/2015/07/sharepoint-rest-do-support-query.html
+        searchQuery.QueryTemplate = this._queryTemplate;        
 
         searchQuery.RowLimit = this._resultsCount ? this._resultsCount : 50;
         searchQuery.SelectProperties = this._selectedProperties;
@@ -103,8 +104,8 @@ class SearchService implements ISearchService {
         ];
 
         if (this._sortList) {
-            let sortOrders = this._sortList.split(',');
-            sortList = sortOrders.map(sorter => {
+            let sortDirections = this._sortList.split(',');
+            sortList = sortDirections.map(sorter => {
                 let sort = sorter.split(':');
                 let s: Sort = { Property: sort[0].trim(), Direction: SortDirection.Descending };
                 if (sort.indexOf('[') !== -1) {
@@ -309,7 +310,11 @@ class SearchService implements ISearchService {
         const webAbsoluteUrl = this._context.pageContext.web.absoluteUrl;
         
         try {
-            const encodedFileName = filename ? filename.replace(/['']/g, '') : '';
+            let encodedFileName = filename ? filename.replace(/['']/g, '') : '';
+            const queryStringIndex = encodedFileName.indexOf('?');
+            if (queryStringIndex !== -1) { // filename with query string leads to 400 error.
+                encodedFileName = encodedFileName.slice(0, queryStringIndex);
+            }
             const iconFileName = await this._localPnPSetup.web.mapToIcon(encodedFileName, 1);
             const iconUrl = webAbsoluteUrl + '/_layouts/15/images/' + iconFileName;
 

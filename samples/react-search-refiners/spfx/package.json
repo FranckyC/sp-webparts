@@ -29,6 +29,7 @@
     "@pnp/logging": "1.2.5",
     "@pnp/odata": "1.2.5",
     "@pnp/sp": "1.2.5",
+    "@pnp/polyfill-ie11": "1.0.0",
     "@pnp/spfx-controls-react": "1.10.0",
     "@pnp/spfx-property-controls": "1.11.0",
     "@types/fabric": "^1.5.43",
@@ -40,12 +41,12 @@
     "lodash": "4.17.11",
     "handlebars-helpers": "^0.8.4",
     "immutability-helper": "2.4.0",
-    "office-ui-fabric-react": "5.124.0",
+    "office-ui-fabric-react": "^5.131.2",
     "on-el-resize": "0.0.4",
     "react-ace": "6.1.4",
     "react-custom-scrollbars": "4.1.2",
     "react-js-pagination": "3.0.0",
-    "video.js": "^7.1.0"
+    "video.js": "^7.3.0"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "1.7.0",

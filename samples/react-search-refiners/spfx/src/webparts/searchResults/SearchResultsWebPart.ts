@@ -13,11 +13,7 @@ import {
   IPropertyPaneField,
   PropertyPaneToggle,
   PropertyPaneSlider,
-  PropertyPaneCheckbox,
-  IPropertyPaneDropdownOption,
-  PropertyPaneDropdown,
   IPropertyPaneChoiceGroupOption,
-  IPropertyPaneCustomFieldProps,
   PropertyPaneChoiceGroup
 } from '@microsoft/sp-webpart-base';
 import * as strings from 'SearchResultsWebPartStrings';
@@ -38,7 +34,6 @@ import MockTaxonomyService from '../../services/TaxonomyService/MockTaxonomyServ
 import ISearchResultsContainerProps from './components/SearchResultsContainer/ISearchResultsContainerProps';
 import { Placeholder, IPlaceholderProps } from '@pnp/spfx-controls-react/lib/Placeholder';
 import { SPHttpClientResponse, SPHttpClient } from '@microsoft/sp-http';
-import { IDynamicDataSource } from '@microsoft/sp-dynamic-data';
 
 declare var System: any;
 const LOG_SOURCE: string = '[SearchResultsWebPart_{0}]';
@@ -58,7 +53,7 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
 
     constructor() {
         super();
-        this._parseRefiners = this._parseRefiners.bind(this);
+        this._parseFieldListString = this._parseFieldListString.bind(this);
     }
 
     public async render(): Promise<void> {
@@ -114,7 +109,8 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
                 sortList: this.properties.sortList,
                 enableQueryRules: this.properties.enableQueryRules,
                 selectedProperties: this.properties.selectedProperties ? this.properties.selectedProperties.replace(/\s|,+$/g, '').split(',') : [],
-                refiners: this._parseRefiners(this.properties.refiners),
+                refiners: this._parseFieldListString(this.properties.refiners),
+                sortableFields: this._parseFieldListString(this.properties.sortableFields),
                 showPaging: this.properties.showPaging,
                 showResultsCount: this.properties.showResultsCount,
                 showBlank: this.properties.showBlank,
@@ -293,13 +289,14 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
         return '';
     }
 
-    /**
-     * Parses refiners from the property pane value by extracting the refiner managed property and its label in the filter panel.
+	/**
+     * Parses a list of Fields from the property pane value by extracting the managed property and its label.
      * @param rawValue the raw value of the refiner
      */
-    private _parseRefiners(rawValue: string): { [key: string]: string } {
+    private _parseFieldListString(rawValue: string): { [key: string]: string } {
 
-        let refiners = {};
+        let returnValues = {};
+        if(!rawValue) { return returnValues; }
 
         // Get each configuration
         let refinerKeyValuePair = rawValue.split(',');
@@ -311,18 +308,18 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
                 switch (refinerValues.length) {
                     case 1:
                         // Take the same name as the refiner managed property
-                        refiners[refinerValues[0]] = refinerValues[0];
+                        returnValues[refinerValues[0]] = refinerValues[0];
                         break;
 
                     case 2:
                         // Trim quotes if present
-                        refiners[refinerValues[0]] = refinerValues[1].replace(/^'(.*)'$/, '$1');
+                        returnValues[refinerValues[0]] = refinerValues[1].replace(/^'(.*)'$/, '$1');
                         break;
                 }
             });
         }
 
-        return refiners;
+        return returnValues;
     }
 
     /**
@@ -451,6 +448,17 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
                 match = pagePropsVariables.exec(reQueryTemplate);
             }
         }
+
+
+        const currentDate = /\{CurrentDate\}/gi;
+        const currentMonth = /\{CurrentMonth\}/gi;
+        const currentYear = /\{CurrentYear\}/gi;
+
+        const d = new Date();
+        queryTemplate = queryTemplate.replace(currentDate, d.getDate().toString());
+        queryTemplate = queryTemplate.replace(currentMonth, (d.getMonth()+1).toString());
+        queryTemplate = queryTemplate.replace(currentYear, d.getFullYear().toString());
+
         return queryTemplate;
     }
 
@@ -477,12 +485,20 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
                 deferredValidationTime: 300
             }),
             PropertyPaneTextField('sortList', {
-                label: strings.SortList,
-                description: strings.SortListDescription,
+                label: strings.Sort.SortList,
+                description: strings.Sort.SortListDescription,
                 multiline: false,
                 resizable: true,
                 value: this.properties.sortList,
                 deferredValidationTime: 300
+            }),
+            PropertyPaneTextField('sortableFields', {
+                label: strings.SortableFieldsLabel,
+                description: strings.SortableFieldsDescription,
+                multiline: true,
+                resizable: true,
+                value: this.properties.sortableFields,
+                deferredValidationTime: 300,
             }),
             PropertyPaneToggle('enableQueryRules', {
                 label: strings.EnableQueryRulesLabel,
