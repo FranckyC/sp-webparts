@@ -234,6 +234,11 @@ export default class SearchResultsWebPart extends BaseClientSideWebPart<ISearchR
 
     protected async onPropertyPaneFieldChanged(propertyPath: string) {
 
+        if (propertyPath === 'selectedLayout') {
+            // Refresh setting the right template for the property pane
+            await this._getTemplateContent();
+        }
+
         // Detect if the layout has been changed to custom...
         if (propertyPath === 'inlineTemplateText') {
 
